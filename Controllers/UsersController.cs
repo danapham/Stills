@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Stills.DataAccess;
+using Stills.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,32 +10,22 @@ using System.Threading.Tasks;
 namespace Stills.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/Users")]
     public class UsersController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        UsersRepository _repo;
+        public UsersController(UsersRepository repo)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<UsersController> _logger;
-
-        public UsersController(ILogger<UsersController> logger)
-        {
-            _logger = logger;
+            _repo = repo;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpPost]
+        public IActionResult AddUser(User user)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            _repo.Add(user);
+            return Created($"api/Users", user);
         }
+
+
     }
 }
