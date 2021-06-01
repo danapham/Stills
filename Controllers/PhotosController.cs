@@ -25,5 +25,14 @@ namespace Stills.Controllers
             _repo.Add(photo);
             return Created($"api/Photos", photo);
         }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var photos = _repo.GetAll();
+
+            return Ok(photos);
+
+        }
     }
 }
