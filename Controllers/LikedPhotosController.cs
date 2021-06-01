@@ -39,5 +39,18 @@ namespace Stills.Controllers
 
             return Ok(likedPhoto);
         }
+
+        [HttpGet("{fbId}")]
+        public IActionResult GetByFbId(string fbId)
+        {
+            var likedPhoto = _repo.GetByFbId(fbId);
+
+            if (likedPhoto == null)
+            {
+                return NotFound("There is no liked photo with these parameters.");
+            }
+
+            return Ok(likedPhoto);
+        }
     }
 }

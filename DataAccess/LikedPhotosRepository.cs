@@ -44,16 +44,53 @@ namespace Stills.DataAccess
 	                        on u.Id = l.UserId
                         left join Photos p
 	                        on p.Id = l.PhotoId
+	                        left join Users up
+		                        on up.Id = p.UserId
+	                        left join Categories c
+		                        on c.Id = p.CategoryId
                         Where u.FirebaseId = @fbId AND l.PhotoId = @photoId";
 
-            var likedPhoto = db.Query<LikedPhoto, User, Photo, LikedPhoto>(sql,
-                (likedPhoto, user, photo) =>
+            var likedPhoto = db.Query<LikedPhoto, User, Photo, User, Category, LikedPhoto>(sql,
+                (likedPhoto, user, photo, pUser, category) =>
                 {
+                    photo.User = pUser;
+                    photo.Category = category;
+
                     likedPhoto.User = user;
                     likedPhoto.Photo = photo;
 
                     return likedPhoto;
                 }, new { fbId, photoId });
+
+            return likedPhoto;
+        }
+
+        public IEnumerable<LikedPhoto> GetByFbId(string fbId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"SELECT * from LikedPhotos l
+                        left join Users u
+	                        on u.Id = l.UserId
+                        left join Photos p
+	                        on p.Id = l.PhotoId
+	                        left join Users up
+		                        on up.Id = p.UserId
+	                        left join Categories c
+		                        on c.Id = p.CategoryId
+                        Where u.FirebaseId = @fbId";
+
+            var likedPhoto = db.Query<LikedPhoto, User, Photo, User, Category, LikedPhoto>(sql,
+                (likedPhoto, user, photo, pUser, category) =>
+                {
+                    photo.User = pUser;
+                    photo.Category = category;
+
+                    likedPhoto.User = user;
+                    likedPhoto.Photo = photo;
+
+                    return likedPhoto;
+                }, new { fbId });
 
             return likedPhoto;
         }
