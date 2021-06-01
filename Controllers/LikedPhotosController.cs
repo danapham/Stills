@@ -26,5 +26,18 @@ namespace Stills.Controllers
 
             return Created($"api/LikedPhotos/{likedPhoto.Id}", likedPhoto);
         }
+
+        [HttpGet("{fbId}&{photoId}")]
+        public IActionResult GetSingle(string fbId, int photoId)
+        {
+            var likedPhoto = _repo.GetSingleLikedPhoto(fbId, photoId);
+
+            if (likedPhoto == null)
+            {
+                return NotFound("There is no liked photo with these parameters.");
+            }
+
+            return Ok(likedPhoto);
+        }
     }
 }
