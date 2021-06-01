@@ -31,6 +31,7 @@ namespace Stills
             services.AddSingleton(Configuration);
             services.AddTransient<UsersRepository>();
             services.AddTransient<PhotosRepository>();
+            services.AddTransient<CategoriesRepository>();
 
         }
 
