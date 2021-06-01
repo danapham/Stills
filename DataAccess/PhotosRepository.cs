@@ -108,7 +108,30 @@ namespace Stills.DataAccess
                 }, new { userFbId });
 
             return photos;
-
         }
+
+        public IEnumerable<Photo> GetTopTenVoted()
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"select top 10 * from Photos p
+                        left join [Users] u
+	                        on u.Id = p.UserId
+                        left join Categories c
+	                        on c.Id = p.CategoryId
+                        order by p.TotalVotes desc";
+
+            var photos = db.Query<Photo, User, Category, Photo>(sql,
+                (photo, user, category) =>
+                {
+                    photo.User = user;
+                    photo.Category = category;
+
+                    return photo;
+                });
+
+            return photos;
+        }
+
     }
 }
