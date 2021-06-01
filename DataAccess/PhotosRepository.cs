@@ -62,5 +62,29 @@ namespace Stills.DataAccess
 
             return photos;
         }
+
+        public IEnumerable<Photo> GetById(int id)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"select * from Photos p
+                        left join [Users] u
+	                        on u.Id = p.UserId
+                        left join Categories c
+	                        on c.Id = p.CategoryId
+                        where p.Id = @id";
+
+            var photo = db.Query<Photo, User, Category, Photo>(sql,
+                (photo, user, category) =>
+                {
+                    photo.User = user;
+                    photo.Category = category;
+
+                    return photo;
+                }, new { id });
+
+            return photo;
+
+        }
     }
 }

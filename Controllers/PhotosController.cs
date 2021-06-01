@@ -34,5 +34,18 @@ namespace Stills.Controllers
             return Ok(photos);
 
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var photo = _repo.GetById(id);
+
+            if (photo == null)
+            {
+                return NotFound("This photo id does not exist.");
+            }
+
+            return Ok(photo);
+        }
     }
 }
