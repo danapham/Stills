@@ -42,6 +42,22 @@ namespace Stills.DataAccess
 
             return user;
         }
+
+        public void Update(User user)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"UPDATE [dbo].[Users]
+                           SET [FirebaseId] = @firebaseId
+                              ,[FirstName] = @firstName
+                              ,[LastName] = @lastName
+                              ,[ImageUrl] = @imageUrl
+                              ,[Email] = @email
+                              ,[IsActive] = @isActive
+                            WHERE [FirebaseId] = @firebaseId";
+
+            db.Execute(sql, user);
+        }
          
     }
 }

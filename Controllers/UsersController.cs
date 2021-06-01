@@ -38,5 +38,15 @@ namespace Stills.Controllers
 
             return Ok(user);
         }
+
+        [HttpPut("{firebaseId}")]
+        public IActionResult UpdateUser(User user)
+        {
+            _repo.Update(user);
+
+            return Ok(user);
+        }
+
+        
     }
 }
