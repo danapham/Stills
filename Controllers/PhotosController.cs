@@ -47,5 +47,18 @@ namespace Stills.Controllers
 
             return Ok(photo);
         }
+
+        [HttpGet("user/{fbId}")]
+        public IActionResult GetByFbId(string fbId)
+        {
+            var photo = _repo.GetByUserFbId(fbId);
+
+            if (photo == null)
+            {
+                return NotFound("This photo id does not exist.");
+            }
+
+            return Ok(photo);
+        }
     }
 }

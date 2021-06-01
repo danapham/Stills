@@ -86,5 +86,29 @@ namespace Stills.DataAccess
             return photo;
 
         }
+
+        public IEnumerable<Photo> GetByUserFbId(string userFbId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"select * from Photos p
+                        left join [Users] u
+	                        on u.Id = p.UserId
+                        left join Categories c
+	                        on c.Id = p.CategoryId
+                        where u.FirebaseId = @userFbId";
+
+            var photos = db.Query<Photo, User, Category, Photo>(sql,
+                (photo, user, category) =>
+                {
+                    photo.User = user;
+                    photo.Category = category;
+
+                    return photo;
+                }, new { userFbId });
+
+            return photos;
+
+        }
     }
 }
