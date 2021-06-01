@@ -68,5 +68,13 @@ namespace Stills.Controllers
 
             return Ok(photos);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(Photo photo)
+        {
+            _repo.Update(photo);
+
+            return Ok();
+        }
     }
 }

@@ -133,5 +133,20 @@ namespace Stills.DataAccess
             return photos;
         }
 
+        public void Update(Photo photo)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"UPDATE [dbo].[Photos]
+                        SET [UserId] = @userId
+                          ,[CategoryId] = @categoryId
+                          ,[Title] = @title
+                          ,[PhotoUrl] = @photoUrl
+                          ,[TotalVotes] = @totalVotes
+                        WHERE Id = @id";
+
+            db.Execute(sql, photo);
+        }
+
     }
 }
