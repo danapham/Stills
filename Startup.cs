@@ -32,6 +32,7 @@ namespace Stills
             services.AddTransient<UsersRepository>();
             services.AddTransient<PhotosRepository>();
             services.AddTransient<CategoriesRepository>();
+            services.AddTransient<LikedPhotosRepository>();
 
         }
 
