@@ -30,6 +30,18 @@ namespace Stills.DataAccess
 
             user.Id = id;
         }
+
+        public IEnumerable<User> GetByFbId(string firebaseId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"select * from Users
+                        where FirebaseId = @firebaseId";
+
+            var user = db.Query<User>(sql, new { firebaseId });
+
+            return user;
+        }
          
     }
 }

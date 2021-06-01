@@ -26,6 +26,17 @@ namespace Stills.Controllers
             return Created($"api/Users", user);
         }
 
+        [HttpGet("{firebaseId}")]
+        public IActionResult GetByFbId(string firebaseId)
+        {
+            var user = _repo.GetByFbId(firebaseId);
 
+            if (user == null)
+            {
+                return NotFound("This user firebase id does not exist.");
+            }
+
+            return Ok(user);
+        }
     }
 }
