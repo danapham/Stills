@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Stills.DataAccess;
+using Stills.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +8,22 @@ using System.Threading.Tasks;
 
 namespace Stills.Controllers
 {
-    public class PhotosController : Controller
+    [ApiController]
+    [Route("api/Photos")]
+    public class PhotosController : ControllerBase
     {
-        public IActionResult Index()
+        PhotosRepository _repo;
+
+        public PhotosController(PhotosRepository repo)
         {
-            return View();
+            _repo = repo;
+        }
+
+        [HttpPost]
+        public IActionResult AddPhoto(Photo photo)
+        {
+            _repo.Add(photo);
+            return Created($"api/Photos", photo);
         }
     }
 }
