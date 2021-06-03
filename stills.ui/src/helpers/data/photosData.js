@@ -32,8 +32,8 @@ const getTopVoted = () => new Promise((resolve, reject) => axios
 .catch((err) => reject(err))
 );
 
-const updatePhoto = (id) => axios
-    .put(`${photosUrl}/${id}`)
+const updatePhoto = (id, newPhoto) => axios
+    .put(`${photosUrl}/${id}`, newPhoto)
     .catch(err => console.warn(err))
 
 export default { addPhoto, getAllPhotos, getById, getByFbId, getTopVoted, updatePhoto }
