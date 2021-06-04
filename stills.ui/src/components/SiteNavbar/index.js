@@ -12,7 +12,7 @@ render() {
             <Link className="link bf l-underline" to="/add-p1">Add</Link>
             <Link className="link bf l-underline" to="/charts-p1">Charts</Link>
             <NavDropdown title={<div className="user-pic"></div>} id="basic-nav-dropdown">
-                <NavDropdown.Item href="#profile-p1"><Link to="profile-p1" className="bf nav-dropdown-link">See Profile</Link></NavDropdown.Item>
+                <Link to="profile-p1" className="bf nav-dropdown-link dropdown-item">See Profile</Link>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#" className="bf">Signout</NavDropdown.Item>
             </NavDropdown>
