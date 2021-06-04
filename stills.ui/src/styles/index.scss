@@ -1,13 +1,18 @@
 @import 'variables';
+@import './Navbar/';
 
 .black-bg {
     background-color: $background;
 }
 
-.orange-ft {
-    color: $navBrand;
-}
-
 a {
     text-decoration: none;
+}
+
+.hf {
+    font-family: $headerFont;
+}
+
+.bf {
+    font-family: $bodyFont;
 }
