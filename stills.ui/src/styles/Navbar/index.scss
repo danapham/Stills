@@ -58,10 +58,12 @@
     color: $tan;
     font-size: 145%;
     text-transform: uppercase;
+    line-height: normal;
 }
 
 .link:hover {
     color: $tan;
+    cursor: pointer;
 }
 
 .brand-link:hover {
@@ -100,4 +102,8 @@
 
 .nav-dropdown-link:hover, .dropdown-item:hover {
     color: black;
+}
+
+.fa-sign-in-alt:hover {
+    filter: brightness(75%);
 }

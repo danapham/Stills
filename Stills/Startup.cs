@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Stills.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -34,6 +36,20 @@ namespace Stills
             services.AddTransient<CategoriesRepository>();
             services.AddTransient<LikedPhotosRepository>();
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.IncludeErrorDetails = true;
+                    options.Authority = "https://securetoken.google.com/petsandpajamas-208df";
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateLifetime = true,
+                        ValidateAudience = true,
+                        ValidateIssuer = true,
+                        ValidAudience = "petsandpajamas-208df",
+                        ValidIssuer = "https://securetoken.google.com/petsandpajamas-208df"
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +64,8 @@ namespace Stills
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
