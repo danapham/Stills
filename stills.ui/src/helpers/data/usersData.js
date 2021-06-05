@@ -1,11 +1,10 @@
-/* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios';
 import { baseUrl } from '../config.json';
 
 const usersUrl = `${baseUrl}/users`;
 
 const addUser = (user) => axios
-    .post(`${usersUrl}`)
+    .post(`${usersUrl}`, user)
     .catch(err => console.warn(err));
 
 const getByFbId = (fbId) => new Promise((resolve, reject) => axios

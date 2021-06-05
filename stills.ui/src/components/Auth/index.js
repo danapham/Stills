@@ -3,22 +3,25 @@ import { NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import usersData from '../../helpers/data/usersData';
 
 export default class Auth extends React.Component {
     loginClickEvent = (e) => {
         e.preventDefault();
         const provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithPopup(provider).then((cred) => {
-            // const user = cred.additionalUserInfo.profile;
+            const user = cred.additionalUserInfo.profile;
+            console.log(cred);
             if (cred.additionalUserInfo.isNewUser) {
-                // const userInfo = {
-                //     firebaseid: cred.user.uid,
-                //     firstname: user.given_name,
-                //     lastname: user.family_name,
-                //     emailaddress: user.email,
-                //     admin: false,
-                //     isactive: true
-                //   };
+                const userInfo = {
+                    firebaseId: cred.user.uid,
+                    firstName: user.given_name,
+                    lastName: user.family_name,
+                    imageUrl: cred.user.photoURL,
+                    email: user.email,
+                    isactive: true
+                };
+                usersData.addUser(userInfo);
             }
         });
     };
