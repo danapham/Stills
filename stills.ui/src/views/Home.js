@@ -1,9 +1,8 @@
+/* eslint-disable max-len */
+import { Link } from 'react-router-dom';
 import React from 'react';
 
 export default class Home extends React.Component {
-    state = {
-
-    }
 
     render() {
         return(
@@ -37,6 +36,19 @@ export default class Home extends React.Component {
                     className="h-img"
                     />
                 </div>
+            </div>
+            <div className="home-info-div">
+                <h1>Welcome to Stills: a photographer’s tool.</h1>
+                <h2>Post a photo.</h2>
+                <h3>Gauge reactions.</h3>
+                <h4>Vote for your favorites.</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet pretium dolor, a consectetur est. Nam vitae felis a magna cursus sollicitudin non non orci. Vestibulum bibendum purus ac quam congue condimentum. Aliquam non egestas risus. Etiam laoreet dignissim orci sit amet consectetur. Phasellus quis nibh sollicitudin, eleifend quam non, aliquet mi. Nulla sed pulvinar massa, et varius elit. Aliquam dictum sit amet tortor id finibus. Aenean imperdiet interdum ante, id rhoncus velit varius quis. Vivamus lacinia sollicitudin viverra. Cras pretium dignissim neque, vitae feugiat lorem vehicula non. Praesent odio mauris, fringilla quis tortor in, accumsan facilisis urna. Duis nec orci sed leo tristique efficitur. Aenean quis bibendum lacus.</p>
+                <p>Morbi tincidunt ornare tortor eget dignissim. Nunc eleifend nisl neque, id pharetra tortor mollis at. Sed pharetra porttitor malesuada. Mauris vitae maximus augue, eget pulvinar nibh. Vivamus tincidunt, dui et lobortis varius, ante dolor fermentum dolor, ut efficitur purus massa elementum ex. Donec et neque facilisis risus mattis mollis. Etiam vehicula justo id quam efficitur malesuada at quis lacus. Nam ullamcorper diam ac urna faucibus porttitor. Etiam porttitor nisi ut ligula semper fermentum. In venenatis pretium turpis, vel hendrerit augue pellentesque non.</p>
+                <p>Vivamus aliquet urna non pharetra aliquet. Sed venenatis consequat mauris, non pulvinar libero molestie eget. Ut vitae elementum lorem. Cras suscipit nulla in risus venenatis tincidunt. Nunc purus magna, dictum pulvinar bibendum vel, posuere a turpis. Vivamus vulputate quam non nunc sagittis, non interdum lacus molestie. Nullam ut neque pretium, porta lectus eu, gravida mi. Vivamus facilisis elit nec eros sollicitudin convallis. Nullam quis dictum mauris, sed imperdiet ex. Cras eleifend sem in nisl tincidunt gravida volutpat ac mauris. Vestibulum vitae arcu maximus, tempor mauris id, mattis mauris. In hac habitasse platea dictumst.</p>
+            <div className="h-button-div">
+            <button className="h-button"><Link to="/add-p1" className="h-button-link">Submit a photo</Link></button>
+            <button className="h-button"><Link to="/vote-p1" className="h-button-link">Start voting</Link></button>
+            </div>
             </div>
             </>
         )
