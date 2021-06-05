@@ -11,7 +11,6 @@ export default class Auth extends React.Component {
         const provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithPopup(provider).then((cred) => {
             const user = cred.additionalUserInfo.profile;
-            console.log(cred);
             if (cred.additionalUserInfo.isNewUser) {
                 const userInfo = {
                     firebaseId: cred.user.uid,
