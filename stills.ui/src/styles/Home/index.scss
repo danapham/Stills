@@ -51,15 +51,15 @@
 .home-info-div > h1 {
     font-family: $headerFont;
     color: $orange;
-    font-size: 5rem;
+    font-size: 4.5rem;
     padding-left: 2%;
-    margin-bottom: 5%;
+    margin-bottom: 4%;
 }
 
 .home-info-div > h2, .home-info-div > h3, .home-info-div > h4 {
     font-family: $headerFont;
     color: $tan;
-    font-size: 4rem;
+    font-size: 3.5rem;
     padding-left: 2%;
     margin-bottom: 3%;
 }
@@ -70,12 +70,12 @@
 
 .home-info-div > h4 {
     margin-left: 20%;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 }
 
 .home-info-div > p {
     font-family: $bodyFont;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: $white;
     padding-left: 2%;
     padding-right: 2%;
@@ -86,7 +86,7 @@
 .h-button {
     background-color: #938487;
     padding: .5% 2% .5% 2%;
-    margin: 5% 3% 5% 3%;
+    margin: 4% 3% 5% 3%;
     border: none;
 
 }
@@ -94,13 +94,13 @@
 .h-button-link {
     color: $white;
     font-family: $bodyFont;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .h-button-link:hover {
     color: $darkBrown;
     font-family: $bodyFont;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .h-button-div {
