@@ -31,7 +31,7 @@ export default class Auth extends React.Component {
         const user = firebase.auth().currentUser;
         let auth;
         if (user) {
-            auth = <NavDropdown title={<div className="user-pic"></div>} id="basic-nav-dropdown">
+            auth = <NavDropdown title={<div style={{ backgroundImage: `url(${this.props.user.photoURL})`}} className="user-pic"></div>} id="basic-nav-dropdown">
                         <Link to="profile-p1" className="bf nav-dropdown-link dropdown-item">See Profile</Link>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#" className="bf" onClick={this.logoutClickEvent}>Signout</NavDropdown.Item>

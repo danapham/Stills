@@ -31,8 +31,8 @@ export default class App extends React.Component {
     return (
       <div className="App black-bg">
         <BrowserRouter>
-          <SiteNavbar />
-          <Routes />
+          <SiteNavbar user={this.state.user} />
+          <Routes user={this.state.user} />
         </BrowserRouter>
       </div>
     );
