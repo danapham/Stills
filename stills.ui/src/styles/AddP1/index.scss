@@ -1,0 +1,15 @@
+.add-page {
+    color: $white;
+}
+
+.add-form {
+    background-color: $brown;
+    margin: 5% 30% 5% 30%;
+    border-radius: 10px;
+    padding: 2%;
+    font-family: $bodyFont;
+}
+
+.add-form > .form-group {
+    margin: 3%;
+}
