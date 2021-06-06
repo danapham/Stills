@@ -15,8 +15,8 @@ export default function Routes({ user }) {
     return (
               <Switch>
                   <Route exact path='/' component={() => <Home />} />
-                  <Route exact path='/vote-p1' component={() => <VoteP1 />} />
-                  <Route exact path='/vote-p2' component={() => <VoteP2 />} />
+                  <Route exact path='/vote-p1' component={(props) => <VoteP1 {...props} />} />
+                  <Route exact path='/vote-p2' component={(props) => <VoteP2 {...props} />} />
                   <Route exact path='/add-p1' component={(props) => <AddP1 user={user} {...props} />} />
                   <Route exact path='/charts-p1' component={() => <ChartsP1 />} />
                   <Route exact path='/profile-p1' component={() => <ProfileP1 />} />

@@ -12,11 +12,19 @@ export default class VoteP1 extends React.Component {
         }))
     }
 
+    handleClick = (e) => {
+        const selectedCategoryId = e.target.id;
+        this.props.history.push('/vote-p2', selectedCategoryId);
+    }
+
     render() {
         return(
-            <>
-            <h1>Vote P1</h1>
-            </>
+            <div className="vote-page-1">
+            <h1 className="vote-p1-header hf">Select a category:</h1>
+            <div className="vp1-categories-container">
+            {this.state.categories.map((c) => <div key={c.id} id={c.id} className="bf v-p1-category-div" onClick={this.handleClick}>{c.name}</div>)}
+            </div>
+            </div>
         )
     }
 }
