@@ -1,3 +1,4 @@
+/* eslint-disable react/no-direct-mutation-state */
 import React from 'react';
 import photosData from '../helpers/data/photosData';
 
@@ -29,6 +30,21 @@ export default class VoteP2 extends React.Component {
         })
     }
 
+    handleClick = (e) => {
+        const { photos } = this.state;
+        this.getTwoRandomPhotos(photos);
+        const selected = e.target.id;
+        const updatedPhoto = {
+            userId: Number(this.state[selected].userId),
+            categoryId: Number(this.state[selected].categoryId),
+            title: this.state[selected].title,
+            photoUrl: this.state[selected].photoUrl,
+            totalVotes: Number(++this.state[selected].totalVotes),
+            id: Number(this.state[selected].id)
+        }
+        photosData.updatePhoto(updatedPhoto.id, updatedPhoto);
+    }
+
     render() {
         const { photo1, photo2 } = this.state;
         return(
@@ -36,11 +52,11 @@ export default class VoteP2 extends React.Component {
             <h1 className="hf vp2-header">Which do you like more?</h1>
             <div className="vp2-photos-div">
                 <div className="vp2-photo1-div">
-                    <img className="vp2-photo" src={photo1.photoUrl} alt={photo1.title} />
+                    <img className="vp2-photo" id="photo1" src={photo1.photoUrl} alt={photo1.title} onClick={this.handleClick} />
                 </div>
                 <p className="hf vp2-or">or</p>
                 <div className="vp2-photo2-div">
-                    <img className="vp2-photo" src={photo2.photoUrl} alt={photo2.title} />
+                    <img className="vp2-photo" id="photo2" src={photo2.photoUrl} alt={photo2.title} onClick={this.handleClick} />
                 </div>
             </div>
             </div>
