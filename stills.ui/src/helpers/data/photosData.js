@@ -1,11 +1,10 @@
-/* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios';
 import { baseUrl } from '../config.json';
 
 const photosUrl = `${baseUrl}/photos`;
 
 const addPhoto = (photo) => axios
-    .post(`${photosUrl}`)
+    .post(`${photosUrl}`, photo)
     .catch((err) => console.warn(err));
 
 const getAllPhotos = () => new Promise((resolve, reject) => axios

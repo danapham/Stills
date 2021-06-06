@@ -1,19 +1,30 @@
-import React from 'react';
-import { Form, Button } from 'react-bootstrap';
 import firebase from 'firebase/app';
+import 'firebase/storage';
+import React from 'react';
+import { Form } from 'react-bootstrap';
+import categoriesData from '../helpers/data/categoriesData';
+import usersData from '../helpers/data/usersData';
+import photosData from '../helpers/data/photosData';
 
 export default class AddP1 extends React.Component {
     state = {
         title: '',
-        category: '',
-        photoUrl: ''
+        categoryId: '',
+        photoUrl: '',
+        categories: [],
+        user: {}
+    }
+
+    componentDidMount() {
+        categoriesData.getAllCategories().then((categories) => this.setState({ categories }));
+        usersData.getByFbId(this.props.user.uid).then((user) => this.setState({ user }));
     }
 
     handleChange = (e) => {
         e.preventDefault();
         if (e.target.id === 'filename') {
             this.setState({
-                photo: ''
+                photoUrl: ''
             });
             const storageRef = firebase.storage().ref();
             const imageRef = storageRef.child(`userPhotos/${e.target.files[0].name}-${Date.now()}`);
@@ -29,19 +40,36 @@ export default class AddP1 extends React.Component {
         }
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+        const newPhoto = {
+            title: this.state.title,
+            categoryId: Number(this.state.categoryId),
+            photoUrl: this.state.photoUrl,
+            totalVotes: 0,
+            userId: Number(this.state.user.id)
+        }
+
+        console.log(newPhoto);
+
+        photosData.addPhoto(newPhoto);
+    }
+
     render() {
+        const { categories } = this.state;
         return(
             <div className="add-page">
-                <Form className="add-form">
+                <Form className="add-form" onSubmit={this.handleSubmit}>
                     <Form.Group controlId="title">
                         <Form.Label>Title</Form.Label>
                         <Form.Control type="text" onChange={this.handleChange} value={this.state.title} required/>
                     </Form.Group>
-                    <Form.Group controlId="category">
+                    <Form.Group controlId="categoryId">
                         <Form.Label>Category</Form.Label>
-                        <Form.Control as="select" onChange={this.handleChange} value={this.state.category} required>
-                            <option value="" disabled selected hidden>Select a category</option>
-                            <option value="category">category</option>
+                        <Form.Control as="select" onChange={this.handleChange} value={this.state.categoryId} required>
+                            <option value="" disabled defaultValue hidden>Select a category</option>
+                            {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option> )}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="photoUrl">

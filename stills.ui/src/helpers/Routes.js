@@ -11,13 +11,13 @@ import ProfileP3 from '../views/ProfileP3';
 import ProfileP4 from '../views/ProfileP4';
 import PhotoDetailP1 from '../views/PhotoDetailP1';
 
-export default function Routes() {
+export default function Routes({ user }) {
     return (
               <Switch>
                   <Route exact path='/' component={() => <Home />} />
                   <Route exact path='/vote-p1' component={() => <VoteP1 />} />
                   <Route exact path='/vote-p2' component={() => <VoteP2 />} />
-                  <Route exact path='/add-p1' component={() => <AddP1 />} />
+                  <Route exact path='/add-p1' component={() => <AddP1 user={user} />} />
                   <Route exact path='/charts-p1' component={() => <ChartsP1 />} />
                   <Route exact path='/profile-p1' component={() => <ProfileP1 />} />
                   <Route exact path='/profile-p2' component={() => <ProfileP2 />} />
