@@ -1,0 +1,20 @@
+.vote-page-1 {
+    margin: 5% 20%;
+}
+.vote-p1-header {
+    color: $orange;
+}
+
+.vp1-categories-container {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: 5%;
+}
+
+.v-p1-category-div {
+    background-color: $lightTan;
+    margin: 3%;
+    padding: 1% 2%;
+    font-size: 2rem;
+    cursor: pointer;
+}
