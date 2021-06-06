@@ -51,9 +51,9 @@ export default class AddP1 extends React.Component {
             userId: Number(this.state.user.id)
         }
 
-        console.log(newPhoto);
-
         photosData.addPhoto(newPhoto);
+
+        this.props.history.push('/');
     }
 
     render() {
@@ -63,24 +63,30 @@ export default class AddP1 extends React.Component {
                 <Form className="add-form" onSubmit={this.handleSubmit}>
                     <Form.Group controlId="title">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="text" onChange={this.handleChange} value={this.state.title} required/>
+                        <Form.Control className="white-input" type="text" onChange={this.handleChange} value={this.state.title} required/>
                     </Form.Group>
                     <Form.Group controlId="categoryId">
                         <Form.Label>Category</Form.Label>
-                        <Form.Control as="select" onChange={this.handleChange} value={this.state.categoryId} required>
+                        <Form.Control className="white-input" as="select" onChange={this.handleChange} value={this.state.categoryId} required>
                             <option value="" disabled defaultValue hidden>Select a category</option>
                             {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option> )}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="photoUrl">
                         <Form.Label>Image Url</Form.Label>
-                        <Form.Control type="url" onChange={this.handleChange} value={this.state.photoUrl} required/>
+                        <Form.Control className="white-input" type="url" onChange={this.handleChange} value={this.state.photoUrl} required/>
                     </Form.Group>
-                    <Form.Group controlId="filename">
-                        <Form.Control type="file" onChange={this.handleChange} />
+                    <Form.Group className="flex-container-ctr">
+                    <p className="or-p">or</p>
                     </Form.Group>
-                    <Form.Group>
-                    <button type="submit">
+                    <Form.Group controlId="filename" className="flex-container-ctr">
+                        <label className="a-form-btn">
+                            <Form.Control type="file" onChange={this.handleChange} />
+                            Choose Photo
+                        </label>
+                    </Form.Group>
+                    <Form.Group className="flex-container-ctr">
+                    <button type="submit" className="a-form-btn">
                     Submit
                     </button>
                     </Form.Group>

@@ -23,3 +23,8 @@ a {
 .bf {
     font-family: $bodyFont;
 }
+
+.flex-container-ctr {
+    display: flex;
+    justify-content: center;
+}
