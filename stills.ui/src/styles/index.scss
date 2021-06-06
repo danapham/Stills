@@ -2,6 +2,11 @@
 @import 'variables';
 @import './Navbar/';
 @import './Home/';
+@import './AddP1/';
+
+.App {
+    min-height: 100vh;
+}
 
 .black-bg {
     background-color: $background;
@@ -17,4 +22,9 @@ a {
 
 .bf {
     font-family: $bodyFont;
+}
+
+.flex-container-ctr {
+    display: flex;
+    justify-content: center;
 }

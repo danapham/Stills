@@ -9,7 +9,7 @@ const addUser = (user) => axios
 
 const getByFbId = (fbId) => new Promise((resolve, reject) => axios
     .get(`${usersUrl}/${fbId}`)
-    .then((res) => resolve(res.data))
+    .then((res) => resolve(res.data[0]))
     .catch((err) => reject(err))
 );
 

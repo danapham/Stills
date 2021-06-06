@@ -1,0 +1,52 @@
+.add-page {
+    color: $white;
+}
+
+.add-form {
+    background-color: $brown;
+    margin: 5% 37% 5% 37%;
+    border-radius: 10px;
+    padding: 2%;
+    font-family: $bodyFont;
+}
+
+.add-form > .form-group {
+    margin: 3%;
+}
+
+.form-group > label {
+    margin-bottom: 0;
+}
+
+.or-p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.a-form-btn {
+    background-color: $tan;
+    padding: 1.2% 5%;
+    cursor: pointer;
+    border-radius: 5px;
+    color: $white;
+    border: none;
+}
+
+.a-form-btn:hover {
+    color: $orange;
+    filter: brightness(85%);
+}
+
+button.a-form-btn {
+    margin-top: 10%;
+    font-size: 1.3rem;
+}
+
+.a-form-btn > input[type="file"] {
+    display: none;
+}
+
+.white-input {
+    background-color: $white;
+    padding: 2%;
+}
