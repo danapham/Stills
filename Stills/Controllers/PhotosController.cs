@@ -26,10 +26,10 @@ namespace Stills.Controllers
             return Created($"api/Photos", photo);
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpGet("category/{categoryId}")]
+        public IActionResult GetByCategoryId(int categoryId)
         {
-            var photos = _repo.GetAll();
+            var photos = _repo.GetByCategory(categoryId);
 
             return Ok(photos);
 
