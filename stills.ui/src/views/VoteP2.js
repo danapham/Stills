@@ -1,12 +1,15 @@
 /* eslint-disable react/no-direct-mutation-state */
 import React from 'react';
 import photosData from '../helpers/data/photosData';
+import likedPhotosData from '../helpers/data/likedPhotosData';
+import usersData from '../helpers/data/usersData';
 
 export default class VoteP2 extends React.Component {
     state = {
         photos: [],
         photo1: {},
-        photo2: {}
+        photo2: {},
+        user: {}
     }
 
     componentDidMount() {
@@ -32,6 +35,7 @@ export default class VoteP2 extends React.Component {
 
     handleClick = (e) => {
         const { photos } = this.state;
+        const { user } = this.props;
         this.getTwoRandomPhotos(photos);
         const selected = e.target.id;
         const updatedPhoto = {
@@ -43,6 +47,16 @@ export default class VoteP2 extends React.Component {
             id: Number(this.state[selected].id)
         }
         photosData.updatePhoto(updatedPhoto.id, updatedPhoto);
+        likedPhotosData.getSingleLikedPhoto(user.uid, updatedPhoto.id).then((res) => {
+            if (res.length === 0) {
+                usersData
+                    .getByFbId(user.uid)
+                    .then((user) => likedPhotosData.addLikedPhoto({
+                        userId: user.id,
+                        photoId: updatedPhoto.id
+                }))
+            }
+        });
     }
 
     render() {
