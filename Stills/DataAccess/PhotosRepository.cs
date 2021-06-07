@@ -41,7 +41,7 @@ namespace Stills.DataAccess
             photo.Id = id;
         }
 
-        public IEnumerable<Photo> GetAll()
+        public IEnumerable<Photo> GetByCategory(int categoryId)
         {
             using var db = new SqlConnection(ConnectionString);
 
@@ -49,7 +49,8 @@ namespace Stills.DataAccess
                         left join [Users] u
 	                        on u.Id = p.UserId
                         left join Categories c
-	                        on c.Id = p.CategoryId";
+	                        on c.Id = p.CategoryId
+                        where p.categoryId = @categoryId";
 
             var photos = db.Query<Photo, User, Category, Photo>(sql,
                 (photo, user, category) =>
@@ -58,7 +59,7 @@ namespace Stills.DataAccess
                     photo.Category = category;
 
                     return photo;
-                });
+                }, new { categoryId });
 
             return photos;
         }

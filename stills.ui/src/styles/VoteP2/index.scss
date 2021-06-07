@@ -1,0 +1,45 @@
+.vote-page-2 {
+    margin: 5% 10% 0 10%;
+}
+.vp2-header {
+    color: $orange;
+    font-size: 3rem;
+}
+
+.vp2-or {
+    color: $orange;
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.vp2-photos-div {
+    display: flex;
+    height: 68vh;
+}
+
+.vp2-photo1-div {
+    width: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.vp2-photo:hover {
+    cursor: pointer;
+}
+
+.vp2-photo2-div {
+    width: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+
+.vp2-photo {
+    object-fit: scale-down;
+    width: 90%;
+}
