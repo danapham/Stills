@@ -1,4 +1,5 @@
 import React from 'react';
+import ProfileSideNav from '../components/ProfileSideNav';
 
 export default class ProfileP2 extends React.Component {
     state = {
@@ -8,6 +9,7 @@ export default class ProfileP2 extends React.Component {
     render() {
         return(
             <>
+            <ProfileSideNav />
             <h1>Profile P2</h1>
             </>
         )

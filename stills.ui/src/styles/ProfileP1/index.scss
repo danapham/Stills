@@ -1,0 +1,80 @@
+.profile-page {
+    display: flex;
+    padding: 1% 3%;
+    min-height: 86vh;
+}
+.edit-profile {
+    background-color: $tan;
+    width: 100%;
+    padding: 1% 0 0 1.5%;
+}
+
+.edit-profile > h1 {
+    color: $background;
+    font-size: 2.3rem;
+    letter-spacing: .25rem;
+}
+
+.pic-btn-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 9%;
+    margin-top: 1%;
+}
+
+.pp1-user-pic {
+    width: 9rem;
+    height: 9rem;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-top: 1%;
+}
+
+.pp1-edit-btn {
+    display: block;
+    background-color: $orange;
+    border: none;
+    color: $white;
+    padding: 1% 1.5%;
+    width: 40%;
+    margin-top: 5%;
+    border-radius: 3px;
+}
+
+.user-form {
+    margin-top: 2%;
+    font-family: $bodyFont;
+}
+
+.name-group {
+    display: inline-block;
+    margin-bottom: 1%;
+}
+
+.pp1-input {
+    padding: 5%;
+    background-color: $white;
+}
+
+.pp1-input-email {
+    padding: .6%;
+    background-color: $white;
+    width: 24%;
+}
+
+.first-name {
+    margin-right: 3%;
+    margin-bottom: 1%;
+}
+
+.save-btn {
+    background-color: $orange;
+    border: none;
+    color: $white;
+    padding: .5% 1.5%;
+    margin-top: 2%;
+    border-radius: 5px;
+}

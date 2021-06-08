@@ -1,0 +1,20 @@
+.profile-side-nav {
+    display: flex;
+    flex-direction: column;
+    background-color: $brown;
+    font-family: $bodyFont;
+    width: 10%;
+}
+
+.psn-link {
+    color: $white;
+    padding: 10% 0 10% 7%;
+    border: 5px $brown solid;
+    font-size: 1rem;
+}
+
+.psn-link:hover {
+    background-color: $tan;
+    color: $white;
+    border: 5px $brown solid;
+}
