@@ -26,6 +26,13 @@ export default class ProfileP1 extends React.Component {
         })
     }
 
+    handleChange = (e) => {
+        e.preventDefault();
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
     }
