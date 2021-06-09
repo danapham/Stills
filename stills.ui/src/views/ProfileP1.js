@@ -14,7 +14,9 @@ export default class ProfileP1 extends React.Component {
         imageUrl: '',
         firebaseId: '',
         isActive: '',
-        id: ''
+        id: '',
+        loading: false,
+        displayAlert: false
     }
 
     componentDidMount() {
@@ -37,7 +39,8 @@ export default class ProfileP1 extends React.Component {
         e.preventDefault();
         if (e.target.id === 'filename') {
             this.setState({
-                imageUrl: ''
+                imageUrl: '',
+                loading: true
             });
             const storageRef = firebase.storage().ref();
             const imageRef = storageRef.child(`profilePhotos/${e.target.files[0].name}-${Date.now()}`);
@@ -59,7 +62,9 @@ export default class ProfileP1 extends React.Component {
                     })
                 });
             })
-            setTimeout(() => window.location.reload(), 2000);
+            setTimeout(() => {
+                window.location.reload()
+            } , 2000);
         } else {
             this.setState({
                 [e.target.id]: e.target.value
@@ -69,7 +74,19 @@ export default class ProfileP1 extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        usersData.updateUser(this.state.firebaseId, this.state)
+        usersData.updateUser(this.state.firebaseId, {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            imageUrl: this.state.imageUrl,
+            firebaseId: this.state.firebaseId,
+            isActive: this.state.isActive,
+            id: this.state.id
+        })
+        this.setState({
+            displayAlert: true
+        })
+        setTimeout(() => this.setState({ displayAlert: false }), 3000);
     }
 
     render() {
@@ -81,21 +98,23 @@ export default class ProfileP1 extends React.Component {
                 <div className="pic-btn-div">
                 <div style={{ backgroundImage: `url(${this.state.imageUrl})`}} className="pp1-user-pic"></div>
                 <AppModal btnName="Edit" btnClass="pp1-edit-btn" saveBtnName="Save" saveBtnType="submit" handleSubmit={this.handleSubmit}>
+                    {this.state.loading === true ? <div className="loading-div"><div className="lds-hourglass"></div></div>
+                    : 
                     <Form onSubmit={this.handleSubmit}>
-                        <Form.Group controlId="imageUrl">
-                            <Form.Label className="modal-form-label bf">Image Url</Form.Label>
-                            <Form.Control className="white-input" type="url" onChange={this.handleChange} value={this.state.imageUrl} required/>
-                        </Form.Group>
-                        <Form.Group className="flex-container-ctr">
-                        <p className="modal-form-or bf">or</p>
-                        </Form.Group>
-                        <Form.Group controlId="filename" className="flex-container-ctr choose-photo-group">
-                            <label className="a-form-btn modal-form-btn">
-                                <Form.Control type="file" onChange={this.handleChange} />
-                                Choose Photo
-                            </label>
-                        </Form.Group>
-                    </Form>
+                    <Form.Group controlId="imageUrl">
+                        <Form.Label className="modal-form-label bf">Image Url</Form.Label>
+                        <Form.Control className="white-input" type="url" onChange={this.handleChange} value={this.state.imageUrl} required/>
+                    </Form.Group>
+                    <Form.Group className="flex-container-ctr">
+                    <p className="modal-form-or bf">or</p>
+                    </Form.Group>
+                    <Form.Group controlId="filename" className="flex-container-ctr choose-photo-group">
+                        <label className="a-form-btn modal-form-btn">
+                            <Form.Control type="file" onChange={this.handleChange} />
+                            Choose Photo
+                        </label>
+                    </Form.Group>
+                </Form>}
                 </AppModal>
                 </div>
                 <Form className="user-form" onSubmit={this.handleSubmit}>
@@ -113,6 +132,9 @@ export default class ProfileP1 extends React.Component {
                     </Form.Group>
                     <button type="submit" className="save-btn">Save</button>
                 </Form>
+                { this.state.displayAlert === true
+                ? <div className="save-alert">Profile saved!</div>
+                : <div></div> }
             </div>
             </div>
         )
