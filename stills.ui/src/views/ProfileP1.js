@@ -1,7 +1,10 @@
 import React from 'react';
+import firebase from 'firebase/app';
+import 'firebase/storage';
 import ProfileSideNav from '../components/ProfileSideNav';
 import { Form } from 'react-bootstrap';
 import usersData from '../helpers/data/usersData';
+import AppModal from '../components/AppModal';
 
 export default class ProfileP1 extends React.Component {
     state = {
@@ -10,31 +13,55 @@ export default class ProfileP1 extends React.Component {
         email: '',
         imageUrl: '',
         firebaseId: '',
-        isActive: ''
+        isActive: '',
+        id: ''
     }
 
     componentDidMount() {
         usersData.getByFbId(this.props.user.uid).then((res) => {
-            this.setState({
-                firstName: res.firstName,
-                lastName: res.lastName,
-                email: res.email,
-                imageUrl: res.imageUrl,
-                firebaseId: res.firebaseId,
-                isActive: res.isActive
-            })
+            if (res !== undefined) {
+                this.setState({
+                    firstName: res.firstName,
+                    lastName: res.lastName,
+                    email: res.email,
+                    imageUrl: res.imageUrl,
+                    firebaseId: res.firebaseId,
+                    isActive: res.isActive,
+                    id: res.id
+                })
+            }
         })
+    }
+
+    constructor(props) {
+        super(props);
+        console.log(this.child)
+        this.child = React.createRef();
     }
 
     handleChange = (e) => {
         e.preventDefault();
-        this.setState({
-            [e.target.id]: e.target.value
-        })
+        if (e.target.id === 'filename') {
+            this.setState({
+                imageUrl: ''
+            });
+            const storageRef = firebase.storage().ref();
+            const imageRef = storageRef.child(`profilePhotos/${e.target.files[0].name}-${Date.now()}`);
+            imageRef.put(e.target.files[0]).then((snapshot) => {
+                snapshot.ref.getDownloadURL().then((imageUrl) => {
+                    this.setState({ imageUrl });
+                });
+            });
+        } else {
+            this.setState({
+                [e.target.id]: e.target.value
+            });
+        }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
+        usersData.updateUser(this.state.firebaseId, this.state)
     }
 
     render() {
@@ -45,20 +72,36 @@ export default class ProfileP1 extends React.Component {
                 <h1 className="hf">Edit Profile</h1>
                 <div className="pic-btn-div">
                 <div style={{ backgroundImage: `url(${this.state.imageUrl})`}} className="pp1-user-pic"></div>
-                <button className="pp1-edit-btn">Edit</button>
+                <AppModal btnName="Edit" btnClass="pp1-edit-btn" saveBtnName="Save" saveBtnType="submit" handleSubmit={this.handleSubmit}>
+                    <Form onSubmit={this.handleSubmit}>
+                        <Form.Group controlId="imageUrl">
+                            <Form.Label>Image Url</Form.Label>
+                            <Form.Control className="white-input" type="url" onChange={this.handleChange} value={this.state.imageUrl} required/>
+                        </Form.Group>
+                        <Form.Group className="flex-container-ctr">
+                        <p className="or-p">or</p>
+                        </Form.Group>
+                        <Form.Group controlId="filename" className="flex-container-ctr">
+                            <label className="a-form-btn">
+                                <Form.Control type="file" onChange={this.handleChange} />
+                                Choose Photo
+                            </label>
+                        </Form.Group>
+                    </Form>
+                </AppModal>
                 </div>
-                <Form className="user-form">
-                    <Form.Group className="name-group first-name">
+                <Form className="user-form" onSubmit={this.handleSubmit}>
+                    <Form.Group className="name-group first-name" controlId="firstName">
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="text" className="pp1-input" value={this.state.firstName} />
+                        <Form.Control type="text" className="pp1-input" value={this.state.firstName} onChange={this.handleChange} />
                     </Form.Group>
-                    <Form.Group className="name-group">
+                    <Form.Group className="name-group" controlId="lastName">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="text" className="pp1-input" value={this.state.lastName} />
+                        <Form.Control type="text" className="pp1-input" value={this.state.lastName} onChange={this.handleChange} />
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group controlId="email">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" className="pp1-input-email" value={this.state.email} />
+                        <Form.Control type="email" className="pp1-input-email" value={this.state.email} onChange={this.handleChange} />
                     </Form.Group>
                     <button type="submit" className="save-btn">Save</button>
                 </Form>

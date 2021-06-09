@@ -44,6 +44,10 @@
     border-radius: 3px;
 }
 
+.pp1-edit-btn:hover {
+    filter: brightness(75%);
+}
+
 .user-form {
     margin-top: 2%;
     font-family: $bodyFont;
@@ -77,4 +81,8 @@
     padding: .5% 1.5%;
     margin-top: 2%;
     border-radius: 5px;
+}
+
+.save-btn:hover {
+    filter: brightness(75%)
 }
