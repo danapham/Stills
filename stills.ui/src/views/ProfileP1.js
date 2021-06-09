@@ -33,12 +33,6 @@ export default class ProfileP1 extends React.Component {
         })
     }
 
-    constructor(props) {
-        super(props);
-        console.log(this.child)
-        this.child = React.createRef();
-    }
-
     handleChange = (e) => {
         e.preventDefault();
         if (e.target.id === 'filename') {
@@ -47,11 +41,25 @@ export default class ProfileP1 extends React.Component {
             });
             const storageRef = firebase.storage().ref();
             const imageRef = storageRef.child(`profilePhotos/${e.target.files[0].name}-${Date.now()}`);
-            imageRef.put(e.target.files[0]).then((snapshot) => {
+            imageRef
+            .put(e.target.files[0])
+            .then((snapshot) => {
                 snapshot.ref.getDownloadURL().then((imageUrl) => {
-                    this.setState({ imageUrl });
+                    this.setState({
+                        imageUrl
+                    })
+                    usersData.updateUser(this.state.firebaseId, {
+                        firstName: this.state.firstName,
+                        lastName: this.state.lastName,
+                        email: this.state.email,
+                        imageUrl: imageUrl,
+                        firebaseId: this.state.firebaseId,
+                        isActive: this.state.isActive,
+                        id: this.state.id
+                    })
                 });
-            });
+            })
+            setTimeout(() => window.location.reload(), 2000);
         } else {
             this.setState({
                 [e.target.id]: e.target.value
