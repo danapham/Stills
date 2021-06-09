@@ -86,3 +86,37 @@
 .save-btn:hover {
     filter: brightness(75%)
 }
+.modal-content {
+    background-color: $brown;
+}
+.modal-header {
+    justify-content: flex-end;
+    border: none;
+    padding: .5%;
+}
+.modal-header > button.close {
+    background-color: $brown;
+    border: none;
+    font-size: 2rem;
+    padding-right: 2%;
+    color: $white;
+}
+
+.modal-form-label {
+    color: $white;
+}
+
+.modal-form-or {
+    color: $white;
+    font-size: 1.2rem;
+    padding-top: 2%;
+}
+
+.modal-form-btn {
+    background-color: $lightTan;
+    font-size: 1.2rem;
+}
+
+.choose-photo-group {
+    margin-bottom: 5%;
+}

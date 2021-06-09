@@ -83,14 +83,14 @@ export default class ProfileP1 extends React.Component {
                 <AppModal btnName="Edit" btnClass="pp1-edit-btn" saveBtnName="Save" saveBtnType="submit" handleSubmit={this.handleSubmit}>
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="imageUrl">
-                            <Form.Label>Image Url</Form.Label>
+                            <Form.Label className="modal-form-label bf">Image Url</Form.Label>
                             <Form.Control className="white-input" type="url" onChange={this.handleChange} value={this.state.imageUrl} required/>
                         </Form.Group>
                         <Form.Group className="flex-container-ctr">
-                        <p className="or-p">or</p>
+                        <p className="modal-form-or bf">or</p>
                         </Form.Group>
-                        <Form.Group controlId="filename" className="flex-container-ctr">
-                            <label className="a-form-btn">
+                        <Form.Group controlId="filename" className="flex-container-ctr choose-photo-group">
+                            <label className="a-form-btn modal-form-btn">
                                 <Form.Control type="file" onChange={this.handleChange} />
                                 Choose Photo
                             </label>
