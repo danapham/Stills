@@ -20,7 +20,7 @@ const getById = (id) => new Promise((resolve, reject) => axios
 );
 
 const getByFbId = (fbId) => new Promise((resolve, reject) => axios
-.get(`${photosUrl}/${fbId}`)
+.get(`${photosUrl}/user/${fbId}`)
 .then((res) => resolve(res.data))
 .catch((err) => reject(err))
 );
