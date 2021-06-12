@@ -15,7 +15,7 @@ const getSingleLikedPhoto = (fbId, photoId) => new Promise((resolve, reject) => 
 
 const getByFbId = (fbId) => new Promise((resolve, reject) => axios
     .get(`${likedPhotosUrl}/${fbId}`)
-    .then((res) => resolve(res))
+    .then((res) => resolve(res.data))
     .catch((err) => reject(err))
 )
 
