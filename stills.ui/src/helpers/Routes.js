@@ -23,7 +23,7 @@ export default function Routes({ user }) {
                   <Route exact path='/profile-p2' component={() => <ProfileP2 user={user} />} />
                   <Route exact path='/profile-p3' component={() => <ProfileP3 user={user} />} />
                   <Route exact path='/profile-p4' component={() => <ProfileP4 />} />
-                  <Route exact path='/photoDetail-p1' component={() => <PhotoDetailP1 />} />
+                  <Route exact path='/photo-detail/:id' component={(props) => <PhotoDetailP1 {...props} />} />
               </Switch>
     );
   }

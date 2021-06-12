@@ -8,6 +8,7 @@ export default class PhotoDetailP1 extends React.Component {
     render() {
         return(
             <>
+            <img />
             <h1>Photo Detail P1</h1>
             </>
         )
